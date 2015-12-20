@@ -1,0 +1,8 @@
+*.pyc
+*.sqlite
+*.egg
+build/
+*.egg-info/
+dist/
+_build/
+.tox
