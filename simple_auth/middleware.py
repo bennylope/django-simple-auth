@@ -8,16 +8,20 @@ from django.utils.http import urlencode
 
 
 def allow_user(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated():
         return True
     if request.session.get('simple_auth'):
+        print("Sessioned")
         return True
     return False
 
 
-class SimpleAuthMiddleware:
+class SimpleAuthMiddleware(object):
 
     def process_request(self, request):
+        if allow_user(request):
+            return None
+
         IGNORE = getattr(settings, 'SIMPLE_AUTH_IGNORE', [r'^admin/'])
         PROTECT = getattr(settings, 'SIMPLE_AUTH_PROTECT', [])
 

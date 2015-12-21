@@ -9,6 +9,7 @@ try:
 except ImportError:
     import mock
 
+from django.contrib.auth.models import User
 from django.test import TestCase
 from django.test.utils import override_settings
 
@@ -25,18 +26,18 @@ class GatekeeperTests(unittest.TestCase):
 
     def test_authenticated_user(self):
         """Normally authenticated users should be allowed"""
-        self.request.user.is_authenticated = True
+        self.request.user.is_authenticated.return_value = True
         assert allow_user(self.request)
 
     def test_has_session(self):
         """If the user has already entered a good password, allow"""
-        self.request.user.is_authenticated = False
+        self.request.user.is_authenticated.return_value = False
         self.request.session['simple_auth'] = 'kjdk'
         assert allow_user(self.request)
 
     def test_no_session(self):
         """If user has no session key, redirect"""
-        self.request.user.is_authenticated = False
+        self.request.user.is_authenticated.return_value = False
         self.request.session['simple_auth'] = None
         assert not allow_user(self.request)
 
@@ -44,6 +45,7 @@ class GatekeeperTests(unittest.TestCase):
 class URLTests(TestCase):
 
     def test_protect_test_url(self):
+        self.client.logout()
         response = self.client.get("/tester/hello/")
         self.assertRedirects(response, "/password/?url=%2Ftester%2Fhello%2F")
 
@@ -77,3 +79,10 @@ class URLTests(TestCase):
         self.assertEqual(response.status_code, 302)
         response = self.client.get("/goodbye/world/")
         self.assertEqual(response.status_code, 200)
+
+    def test_allowed_authed_user(self):
+        user = User.objects.create(username="bob")
+        self.client.force_login(user)
+        response = self.client.get("/tester/hello/")
+        self.assertEqual(response.status_code, 200)
+        self.client.logout()
