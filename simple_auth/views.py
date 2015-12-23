@@ -11,8 +11,8 @@ def simple_password(request):
         form = PasswordForm(data=request.POST)
         if form.is_valid():
             # TODO: set session with better param
-            request.session['simple_auth'] = True
-            return redirect(form.cleaned_data['url'])
+            request.session["simple_auth"] = True
+            return redirect(form.cleaned_data["url"] or "/")
     else:
         form = PasswordForm()
     return render(request, "simple_auth/password_form.html",

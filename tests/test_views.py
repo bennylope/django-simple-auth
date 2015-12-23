@@ -30,3 +30,13 @@ class PasswordInputTests(TestCase):
         post_response = self.client.post(reverse("simple_auth_password"),
                 data={'password': 'adjktest', 'url': '/tester/hello/'})
         assert post_response.status_code == 200
+
+    def test_root_url(self):
+        post_response = self.client.post(reverse("simple_auth_password"),
+                data={'password': 'test', 'url': '/'})
+        self.assertRedirects(post_response, "/")
+
+    def test_empty_url(self):
+        post_response = self.client.post(reverse("simple_auth_password"),
+                data={'password': 'test', 'url': ''})
+        self.assertRedirects(post_response, "/")
