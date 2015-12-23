@@ -7,18 +7,22 @@ from django.shortcuts import redirect
 from django.utils.http import urlencode
 
 
-def allow_user(request):
-    if request.user.is_authenticated():
-        return True
-    if request.session.get('simple_auth'):
-        return True
-    return False
-
-
 class SimpleAuthMiddleware(object):
+    """
+    Middleware class checks provided URL patterns to protect URLs and allows
+    both authenticated users to access protected URLs and anonymous users who
+    have entered a valid password.
+    """
+
+    def allow_user(self, request):
+        if request.user.is_authenticated():
+            return True
+        if request.session.get('simple_auth'):
+            return True
+        return False
 
     def process_request(self, request):
-        if allow_user(request):
+        if self.allow_user(request):
             return None
 
         IGNORE = getattr(settings, 'SIMPLE_AUTH_IGNORE', [r'^admin/'])

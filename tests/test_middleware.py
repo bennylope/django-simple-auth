@@ -13,7 +13,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from django.test.utils import override_settings
 
-from simple_auth.middleware import allow_user
+from simple_auth.middleware import SimpleAuthMiddleware
 
 
 class GatekeeperTests(unittest.TestCase):
@@ -27,19 +27,19 @@ class GatekeeperTests(unittest.TestCase):
     def test_authenticated_user(self):
         """Normally authenticated users should be allowed"""
         self.request.user.is_authenticated.return_value = True
-        assert allow_user(self.request)
+        assert SimpleAuthMiddleware().allow_user(self.request)
 
     def test_has_session(self):
         """If the user has already entered a good password, allow"""
         self.request.user.is_authenticated.return_value = False
         self.request.session['simple_auth'] = 'kjdk'
-        assert allow_user(self.request)
+        assert SimpleAuthMiddleware().allow_user(self.request)
 
     def test_no_session(self):
         """If user has no session key, redirect"""
         self.request.user.is_authenticated.return_value = False
         self.request.session['simple_auth'] = None
-        assert not allow_user(self.request)
+        assert not SimpleAuthMiddleware().allow_user(self.request)
 
 
 class URLTests(TestCase):
