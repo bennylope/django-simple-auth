@@ -11,7 +11,6 @@ def allow_user(request):
     if request.user.is_authenticated():
         return True
     if request.session.get('simple_auth'):
-        print("Sessioned")
         return True
     return False
 
