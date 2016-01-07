@@ -26,7 +26,10 @@ setup(
     author_email='ben@benlopatin.com',
     url='https://github.com/bennylope/django-simple-auth',
     license='BSD License',
-    packages=['simple_auth'],
+    packages=[
+        'simple_auth',
+        'simple_auth.migrations',
+    ],
     platforms=['OS Independent'],
     classifiers=[
         'Development Status :: 4 - Beta',
