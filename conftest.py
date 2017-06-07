@@ -33,6 +33,12 @@ def pytest_configure():
             "django.contrib.auth.middleware.AuthenticationMiddleware",
             "simple_auth.middleware.SimpleAuthMiddleware",
         ],
+        TEMPLATES = [
+            {
+                'BACKEND': 'django.template.backends.django.DjangoTemplates',
+                'APP_DIRS': True,
+            },
+        ],
         SITE_ID=1,
     )
     django.setup()
