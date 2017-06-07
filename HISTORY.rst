@@ -3,6 +3,12 @@
 History
 =======
 
+0.2.0 (2017-06-07)
+------------------
+
+* Update Django 1.11 compatibilty
+* Drop (tested) support for all previous versions
+
 0.1.2/3 (2015-12-21)
 --------------------
 

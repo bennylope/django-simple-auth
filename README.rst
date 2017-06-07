@@ -4,7 +4,7 @@ Django Simple Auth
 
 :Info: Super simple password protection for limiting public access to pages and
        assets
-:Version: 0.1.0
+:Version: 0.2.0
 :Author: Ben Lopatin (http://benlopatin.com)
 
 Django Simple Auth is a *secondary* authentication system for protecting any
@@ -19,6 +19,9 @@ First add the application to your Python path. The easiest way is to use
 `pip`::
 
     pip install django-simple-auth
+
+As of version 0.2.0 this is only tested against Django 1.11+ and is probably compatible
+with Django 1.10 but this has not been tested.
 
 Configuring
 -----------
@@ -40,7 +43,7 @@ Next add `simple_auth.urls` to your project URLs.::
 If you want to enable default rule-based limits on your site, install the
 `SimpleAuthMiddleware`::
 
-    MIDDLEWARE_CLASSES = [
+    MIDDLEWARE = [
         ...
         'simple_auth.SimpleAuthMiddleware',
     ]
