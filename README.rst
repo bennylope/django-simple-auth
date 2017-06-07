@@ -45,7 +45,7 @@ If you want to enable default rule-based limits on your site, install the
 
     MIDDLEWARE = [
         ...
-        'simple_auth.SimpleAuthMiddleware',
+        'simple_auth.middleware.SimpleAuthMiddleware',
     ]
 
 By default this will require a password for all URLs except for URLs prefaced
