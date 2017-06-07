@@ -6,6 +6,11 @@ History
 0.2.0 (2017-06-07)
 ------------------
 
+* Fix typo in form template
+
+0.2.0 (2017-06-07)
+------------------
+
 * Update Django 1.11 compatibilty
 * Drop (tested) support for all previous versions
 

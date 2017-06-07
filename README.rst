@@ -4,7 +4,7 @@ Django Simple Auth
 
 :Info: Super simple password protection for limiting public access to pages and
        assets
-:Version: 0.2.0
+:Version: 0.2.1
 :Author: Ben Lopatin (http://benlopatin.com)
 
 Django Simple Auth is a *secondary* authentication system for protecting any
