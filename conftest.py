@@ -26,7 +26,7 @@ def pytest_configure():
             "django.contrib.sites",
             "simple_auth",
         ],
-        MIDDLEWARE_CLASSES=[
+        MIDDLEWARE=[
             "django.middleware.common.CommonMiddleware",
             "django.middleware.csrf.CsrfViewMiddleware",
             "django.contrib.sessions.middleware.SessionMiddleware",

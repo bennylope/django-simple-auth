@@ -13,6 +13,19 @@ class SimpleAuthMiddleware(object):
     both authenticated users to access protected URLs and anonymous users who
     have entered a valid password.
     """
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+
+        process_result = self.process_request(request)
+
+        if process_result is not None:
+            return process_result
+
+        response = self.get_response(request)
+
+        return response
 
     def allow_user(self, request):
         if request.user.is_authenticated():
