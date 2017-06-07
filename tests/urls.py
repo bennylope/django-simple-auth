@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from django.contrib import admin
 from django.http import HttpResponse
 
@@ -9,10 +9,10 @@ def tester(request):
     return HttpResponse("Hello")
 
 
-urlpatterns = patterns('',
+urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^password/$', include('simple_auth.urls')),
     url(r'^tester/hello/$', view=tester),
     url(r'^goodbye/world/$', view=tester),
     url(r'^$', view=tester),
-)
+]
