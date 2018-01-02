@@ -7,10 +7,11 @@ Django Simple Auth
 :Version: 0.2.1
 :Author: Ben Lopatin (http://benlopatin.com)
 
-Django Simple Auth is a *secondary* authentication system for protecting any
-URLs served by your application from public access. It does not replace your
-authentication system. Rather its purpose is to provide very simple
-a simple password for non-public information like shared photo galleries.
+Django Simple Auth is a secondary *authorization* system for protecting any
+URL served by your application from public access. It does not authenticate
+users and it does not nor cannot replace your user authentication system.
+Rather its purpose is to provide a very simple simple password for non-public
+information like shared photo galleries.
 
 Installing
 ==========
